@@ -19,7 +19,10 @@ function getCookie(name) {
   return null;
 }
 
-var websiteURL = window.location.origin;
+function getWebsiteUrl() {
+  var url = window.location.origin;
+  return url;
+}
 
 // var scriptTag = document.querySelector('script[src="bysignal-tracker.js"]');
 
@@ -27,7 +30,7 @@ var websiteURL = window.location.origin;
 // var customAttribute = scriptTag.getAttribute("data-bysignal");
 
 // Function to fetch data from an API
-function sendResponseData(via, apiKey, currentUser) {
+function sendResponseData(via, apiKey, currentUser, websiteURL) {
   var formdata = new FormData();
   formdata.append("via", via);
   formdata.append("api-key", apiKey);
@@ -75,11 +78,15 @@ function sendResponseData(via, apiKey, currentUser) {
 function trackReferral() {
   var referralSource = getUrlParameter("via");
   var currentUser = getCookie("referral_user");
+  var websiteUrl = getWebsiteUrl();
+
+  console.log(websiteUrl);
 
   sendResponseData(
     referralSource,
     "1710247533583x687487790298431500",
-    currentUser
+    currentUser,
+    websiteUrl
   );
 }
 
