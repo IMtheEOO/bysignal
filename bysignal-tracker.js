@@ -24,12 +24,12 @@ function getWebsiteUrl() {
   return url;
 }
 
-// var scriptTag = document.querySelector('script[src="bysignal-tracker.js"]');
+var scriptTag = document.getElementById("bysignalscript");
 
-// Retrieve the value of the custom attribute
-// var customAttribute = scriptTag.getAttribute("data-bysignal");
+var customAttribute = scriptTag.getAttribute("data-bysignal");
 
-// Function to fetch data from an API
+console.log(customAttribute)
+
 function sendResponseData(via, apiKey, currentUser, websiteURL) {
   var formdata = new FormData();
   formdata.append("via", via);
@@ -61,14 +61,15 @@ function sendResponseData(via, apiKey, currentUser, websiteURL) {
       var days = data.response.duration;
 
       var expires = "";
+
+      var date = new Date();
       date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
       expires = "; expires=" + date.toUTCString();
 
-      document.cookie = "referral_source=" + referral + date + "; path=/";
+      document.cookie = "referral_source=" + referral + expires + "; path=/";
 
       document.cookie = "referral_user=" + referralUser + expires + "; path=/";
 
-      console.log(date);
       console.log(expires);
     })
     .catch((error) => {
@@ -80,8 +81,6 @@ function trackReferral() {
   var referralSource = getUrlParameter("via");
   var currentUser = getCookie("referral_user");
   var websiteUrl = getWebsiteUrl();
-
-  console.log(websiteUrl);
 
   sendResponseData(
     referralSource,
