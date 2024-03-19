@@ -70,6 +70,8 @@ function sendResponseData(via, apiKey, currentUser, websiteURL) {
       document.cookie = "referral_source=" + referral + expires + "; path=/";
 
       document.cookie = "referral_user=" + referralUser + expires + "; path=/";
+
+      console.log(expires);
     })
     .catch((error) => {
       console.error("There was a problem with the fetch operation:", error);
