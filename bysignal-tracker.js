@@ -71,6 +71,7 @@ function sendResponseData(via, apiKey, currentUser, websiteURL) {
 
       document.cookie = "referral_user=" + referralUser + expires + "; path=/";
 
+      console.log(date);
       console.log(expires);
     })
     .catch((error) => {
