@@ -64,7 +64,7 @@ function sendResponseData(via, apiKey, currentUser, websiteURL) {
       date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
       expires = "; expires=" + date.toUTCString();
 
-      document.cookie = "referral_source=" + referral + expires + "; path=/";
+      document.cookie = "referral_source=" + referral + date + "; path=/";
 
       document.cookie = "referral_user=" + referralUser + expires + "; path=/";
 
