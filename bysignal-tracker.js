@@ -58,16 +58,18 @@ function sendResponseData(via, apiKey, currentUser, websiteURL) {
 
       var referralUser = data.response.current_user;
       var referral = data.response.referral_id;
+      var days = data.response.duration;
 
-      document.cookie =
-        "referral_source=" +
-        referral +
-        "; expires=Thu, 18 Dec 2025 12:00:00 UTC; path=/";
+      var expires = "";
+      if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+        expires = "; expires=" + date.toUTCString();
+      }
 
-      document.cookie =
-        "referral_user=" +
-        referralUser +
-        "; expires=Thu, 18 Dec 2025 12:00:00 UTC; path=/";
+      document.cookie = "referral_source=" + referral + expires + "; path=/";
+
+      document.cookie = "referral_user=" + referralUser + expires + "; path=/";
     })
     .catch((error) => {
       console.error("There was a problem with the fetch operation:", error);
