@@ -76,7 +76,6 @@ function sendResponseData(via, apiKey, currentUser, websiteURL) {
     });
 }
 
-// Function to track referral information
 function trackReferral() {
   var referralSource = getUrlParameter("via");
   var currentUser = getCookie("referral_user");
@@ -92,7 +91,6 @@ function trackReferral() {
   );
 }
 
-// Call the tracking function when the page loads
 window.onload = function () {
   trackReferral();
 };
